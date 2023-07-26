@@ -1,0 +1,14 @@
+db.libros.aggregate([
+    {
+      $lookup: {
+        from: 'actores',
+        localField: 'autor_id',
+        foreignField: '_id',
+        as: 'autor'
+      }
+    },
+    {
+      $unwind: '$autor'
+    }
+  ])
+  

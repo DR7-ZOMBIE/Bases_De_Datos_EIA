@@ -1,0 +1,21 @@
+const MongoClient = require('mongodb').MongoClient;
+const url = 'mongodb://localhost:27017';
+const dbName = 'Prueba';
+
+MongoClient.connect(url, { useNewUrlParser: true }, (err, client) => {
+    if (err) throw err;
+
+    const db = client.db(dbName);
+
+    // Código de inserción de datos en la base de datos
+
+    const collectionName = 'Bandidas';
+        const data = { name: 'Juan', age: 30, city: 'Bogotá' };
+
+    db.collection(collectionName).insertOne(data, (err, result) => {
+    if (err) throw err;
+    console.log(`Se insertó un documento en la colección ${collectionName}`);
+});
+
+    client.close();
+});

@@ -1,0 +1,353 @@
+// Collection que cree en compass 
+
+use('otra');
+
+let brayayin = {
+    name: 'brayayin',
+    job: 'El puto mayor',
+    status: 'Muy peligroso',
+    age: 69
+}
+
+db.bandidas.insert(brayayin)
+
+//db es la base de datos que voy a llamar y 
+// despues la coleccion
+
+db.bandidas.insertOne({
+    name: 'Valeria',
+    job: 'Nina alegre',
+    status: 'Todas las valerias mienten',
+    age: 18
+})
+
+db.bandidas.find({}) // Select * from bandidas
+
+let users = [
+    {
+        name: 'Lorenzo',
+        job: 'El put',
+        status: 'Perdido en las drogas',
+        age: 42,
+        patrimonio:-1,
+
+    }
+    ,{
+        name: 'Simon londonio',
+        job: 'El escalvo del patron uribe',
+        status: 'Vecino de uribe',
+        age: 12,
+        isGay: true
+    }
+    ,{
+        name: 'Luisa',
+        job: 'Mesera',
+        status: 'Garganta profunda',
+        age: 35,
+        trabuco: true
+    }
+    ,{
+        name: 'Cecil',
+        job: 'vendedor de bonice',
+        status: 'Viviendo la vida',
+        age: 28,
+        size: 8
+    }
+    ,{
+        name: 'Juliana',
+        job: 'Emprendedora web',
+        status: 'Dios me libre',
+        age: 84,
+        semueve: false
+    }
+    ,{
+        name: 'Mariana',
+        job: 'Corredora de bolsa',
+        status: 'Ser linda',
+        age: 24,
+        granpechonalidad: true
+    }
+    ,{
+        name: 'Monica',
+        job: 'Dejarme en la quiebra',
+        status: 'Tristeza buen pastor',
+        age: 13,
+        isTramadora: true
+    }
+    ,{
+        name: 'Briggite',
+        job: 'Vendedora de mofles',
+        status: 'Falling in love by Daniel',
+        age: 23,
+        isChimbita: false
+    }
+
+]
+
+db.bandidas.insertMany(users);
+
+db.bandidas.find({age:{
+    $gte: 24 // Greater than equals
+}})
+
+// Select * from bandidas where age >= 24
+
+db.bandidas.find({age:{
+    $lte: 24 // Less than equals
+}})
+
+/*
+1. Mayor que $gt
+2. Mayor igual que $gte
+3. Menor que $lt
+4. Menor igual que $lte
+5. Diferente de $ne
+6. igual $eq
+*/
+
+use('otra')
+db.bandidas.find({name: 'Juliana'})
+
+db.bandidas.find({name:{
+    $eq: 'Juliana' // Less than equals
+}})
+
+// Buscar por parametros especificos
+use('otra')
+db.bandidas.find({}, {_id: false,name: true , status: true})
+
+use('otra')
+db.bandidas.find({
+    name: /^C/
+})
+
+use('otra')
+db.bandidas.find({
+    $or: [
+        {name:  /^Bri/ },
+        {status: /Vivi/}
+    ]
+})
+
+use('otra')
+db.bandidas.find({
+    $and: [
+        {name:  /^Bri/ },
+        {status: /\w+/}
+    ]
+})
+
+// Menor a mayor
+
+db.bandidas.find({
+
+
+}).sort(
+    {
+        age:1
+    }
+);
+
+// Mayor a menor
+
+db.bandidas.find({
+
+
+}).sort(
+    {
+        age:-1
+    }
+);
+
+use('otra')
+db.bandidas.find({age:{
+    $lte : 42
+},
+status: /^Perd/
+})
+
+use('otra')
+db.bandidas.find({
+    $or: [
+        {age:  {$lte : 42}},
+        {status: /^Per/}
+    ]
+})
+
+// Preguntar si alguien tiene ese atributo
+
+use('otra')
+db.bandidas.find({
+   size:{
+        $exists:true
+   }
+},{name: true,size: true, _id: false})
+
+// Preguntar si el atributo es ese tipo de dato
+
+use('otra')
+db.bandidas.find({
+   size:{
+        $type:'int'
+   }
+},{name: true,size: true, _id: false})
+
+
+// Como actualizar datos:
+
+use('otra')
+db.bandidas.updateOne({
+    name:/Cecil/
+},{
+    $set:{
+        size:7
+    }
+},{new:true}
+)
+
+//Actualizar datos:
+
+use('otra')
+db.bandidas.findOneAndUpdate({
+    name:/Lorenzo/
+},{
+    $set:{
+        name:'Rafael'
+    }
+})
+
+// Borrar todo de la base de datos
+
+use('otra')
+db.bandidas.remove({})
+
+use('otra')
+for(let i = 0; i < 150000 ; i++){
+    db.bandidas.insertOne({
+        age:i,
+        name:'user' + i
+    })
+}
+
+// Contar la cantidad de elementos
+
+use('otra')
+db.bandidas.count({})
+
+//Ordenar de mayor a menor
+
+use('otra');
+db.bandidas.find({}).sort({age: -1}).limit(50);
+
+// Insertar:
+
+
+
+let persona = {
+    name: 'Lorenzo',
+    trabajos: ['obrero','Gay']
+}
+
+use('otra')
+db.bandidas.insertOne(persona)
+
+use('otra');
+db.bandidas.find({
+    trabajos: {
+      $all: ['obrero']
+    }
+  });
+
+  //Insertar un array
+
+  use('otra')
+  db.bandidas.updateOne(
+    {
+      name: 'Lorenzo'
+    },
+    {
+      $push: {
+        incomes: {
+          $each: [50, 350]
+        }
+      }
+    }
+  );
+
+  // De menor a mayor de mayor a menor
+  
+  use('otra')
+  db.bandidas.updateOne(
+    {
+      name: 'Lorenzo'
+    },
+    {
+      $push: {
+        girlss: {
+          $each: ['Natacha','Yerlie','Rafael'].sort().reverse()
+        }
+      }
+    }
+  );
+
+
+use('otra')
+db.bandidas.insertOne({
+    name: 'juanjo',
+    job: 'Pone y quita condondes',
+    flete:{
+        name:'Lo que sea',
+        city:'Bross'
+    }
+})
+db.bandidas.insertOne({
+    name:'Cano puto',
+    job:'sin Trabajo',
+    flete: {
+        name:'majo',
+        city:'sabanea'
+    }
+})
+
+use('otra')
+db.bandidas.find({})
+
+use('otra')
+db.bandidas.findOneAndUpdate({name:/juanjo/},{
+    $set:{
+        'flete.name': 'Mariana',
+        'flete.city': 'Maringrilla'
+    }
+}  
+)
+
+use('otra')
+db.bandidas.find({
+    flete:{
+        $exists:true
+    }
+})
+
+use('otra');
+db.bandidas.findOneAndUpdate(
+    { name: /juanjo/},
+    {
+        $set: {
+            'job.$': 'Vendedor de organos' // Asegúrate de que esta cadena de texto coincida con el valor almacenado en la base de datos
+        }
+    }
+);
+
+use('otra')
+db.bandidas.find({})
+
+use('otra')
+db.bandidas.findOneAndUpdate(
+    { name:/juanjo/},
+    {
+        $pull: {
+            job: 'Pone y quita condondes' // Asegúrate de que esta cadena de texto coincida con el valor almacenado en la base de datos
+        }
+    }
+);
+

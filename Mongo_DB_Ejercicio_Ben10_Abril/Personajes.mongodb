@@ -1,0 +1,110 @@
+use('Ben10')
+
+let personajes = [
+    {
+       
+        "nombre": "Ben Tennyson",
+        "edad": 10,
+        "descripcion": "Protagonista principal de la serie y portador del Omnitrix",
+        "ocupacion": "Estudiante, superhéroe",
+        
+        },
+        
+        {
+        
+        "nombre": "Gwen Tennyson",
+        "edad": 10,
+        "descripcion": "Prima de Ben y habilidosa en artes marciales y magia",
+        "ocupacion": "Estudiante, superhéroe",
+       
+        },
+        
+        {
+       
+        "nombre": "Max Tennyson",
+        "edad": 60,
+        "descripcion": "Abuelo de Ben y Gwen, ex-plomero y mentor",
+        "ocupacion": "Jubilado, mentor",
+      
+        },
+        
+        {
+      
+        "nombre": "Kevin Levin",
+        "edad": 11,
+        "descripcion": "Ex-enemigo de Ben, ahora amigo y aliado",
+        "ocupacion": "Estudiante, superhéroe",
+       
+        },
+        
+        {
+      
+        "nombre": "Vilgax",
+        "edad": 18,
+        "descripcion": "Villano principal, busca apoderarse del Omnitrix",
+        "ocupacion": "Conquistador",
+      
+        },
+        
+        {
+     
+        "nombre": "SixSix",
+        "edad": 17,
+        "descripcion": "Cazarrecompensas alienígena y enemigo de Ben",
+        "ocupacion": "Cazarrecompensas",
+       
+        },
+        
+        {
+       
+        "nombre": "Charmcaster",
+        "edad": 11,
+        "descripcion": "Hechicera y rival de Gwen",
+        "ocupacion": "Hechicera",
+       
+        },
+        
+        {
+       
+        "nombre": "Hex",
+        "edad": 19,
+        "descripcion": "Hechicero malvado y tío de Charmcaster",
+        "ocupacion": "Hechicero",
+     
+        },
+        
+        {
+     
+        "nombre": "Zombozo",
+        "edad": 23,
+        "descripcion": "Villano payaso que se alimenta del miedo",
+        "ocupacion": "Criminal, payaso",
+       
+        },
+
+        {
+            
+            "nombre": "Charmcaster",
+            "edad": 11,
+            "descripcion": "Hechicera, rival de Gwen y sobrina de Hex",
+            "ocupacion": "Hechicera",
+            
+            }
+
+            
+
+
+]
+
+use('Ben10')
+db.Personajes.insertMany(personajes);
+
+use('Ben10')
+db.Personajes.findOne({
+    nombre: "Zombozo"
+})
+
+use('Ben10')
+db.Personajes.findOne({
+    nombre: /^Zombozo/
+})

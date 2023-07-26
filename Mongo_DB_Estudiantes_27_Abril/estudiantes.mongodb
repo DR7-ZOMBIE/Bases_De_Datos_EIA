@@ -1,0 +1,77 @@
+// use ('Estudiantes')
+// let estudiante = [
+//     {
+//     nombre: 'Dennis',
+//     apellido: 'Prada',
+//     cedula: '1017261972',
+//     materiasTomadas: []
+//     },{
+//         nombre: 'Juan',
+//         apellido: 'Felipe',
+//         cedula: '1017261972',
+//         materiasTomadas: []
+//     }
+// ]
+// db.estudiante.insertMany(estudiante)
+
+// db.estudiante.updateOne({nombre:'Dennis'},
+//     {
+//         $push: {
+//             materiasTomadas: { $each: materias }
+//         }
+//     }
+// )
+
+// db.estudiante.updateOne({nombre:'Juan'},
+//     {
+//         $push: {
+//             materiasTomadas: { $each: materias }
+//         }
+//     }
+// )
+
+// use('Estudiantes')
+// db.estudiante.find({})
+
+
+// use('Estudiantes')
+// db.estudiante.remove({})
+
+use('Estudiantes')
+
+function crearEstudiante(nombre, apellido, cedula) {
+    return {
+        nombre: nombre,
+        apellido: apellido,
+        cedula: cedula,
+        materiasTomadas: []
+    }
+}
+
+let estudiantes = []
+
+for (let i = 0; i < 10; i++) {
+    let estudiante = crearEstudiante(`Estudiante${i}`, `Apellido${i}`, `10172619${i}`);
+    estudiantes.push(estudiante);
+}
+
+db.estudiante.insertMany(estudiantes)
+
+let materias = [   
+    {        nombre: 'Biologia',        nota: 2,        semestre: 1    },   
+{        nombre: 'calculo',        nota: 2,        semestre: 2    }]
+
+db.estudiante.updateMany({},
+    {
+        $push: {
+            materiasTomadas: { $each: materias }
+        }
+    }
+)
+
+
+use('Estudiantes')
+db.estudiante.find({})
+
+use('Estudiantes')
+db.estudiante.remove({})
